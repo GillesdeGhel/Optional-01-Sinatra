@@ -2,7 +2,7 @@
 
 <% @book.each_with_index do |recipe, index| %>
   <% done = recipe.done? == "true" ? "[x]" : "[ ]" %>
-      <p> <%= "#{index + 1} #{done} #{recipe.name.capitalize} (#{recipe.time}), difficulty: #{recipe.difficulty}/4" %>
+      <p> <%= "#{index + 1} #{done} #{recipe.name} (#{recipe.time}), difficulty: #{recipe.difficulty}/4" %> <a href=<%="/remove/#{index}"%> >  "destroy"  </a>
    <% end %>
 </p>
 

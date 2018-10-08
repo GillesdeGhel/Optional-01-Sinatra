@@ -14,8 +14,8 @@ end
 
 get '/' do
   csv_file   = File.join(__dir__, 'recipes.csv')
-  cookbook   = Cookbook.new(csv_file)
-  @book = cookbook.all
+  @cookbook   = Cookbook.new(csv_file)
+  @book = @cookbook.all
   erb :index
 end
 
@@ -28,13 +28,33 @@ get '/create' do
 end
 
 
-get '/team/:username' do
-  puts params[:username]
-  "The username is #{params[:username]}"
+post '/create' do
+  # 1 create recipe
+  recipe = Recipe.new(params[:title], params[:description], params[:duration], params[:difficulty], false)
+  # 2 add to list
+  csv_file = File.join(__dir__, 'recipes.csv')
+  @cookbook = Cookbook.new(csv_file)
+  @cookbook.add_recipe(recipe)
+  # @recettes = @cookbook.all
+  redirect "/"
+  # create recipe based on info
 end
 
-get '/team/:username' do
-  binding.pry  # <= code will stop here for HTTP request localhost:4567/team/someone
-  # [...]
+get '/remove/:index' do
+  index = params[:index].to_i
+  csv_file = File.join(__dir__, 'recipes.csv')
+  @cookbook = Cookbook.new(csv_file)
+  @cookbook.remove_recipe(index)
+  # @recettes = @cookbook.all
+  redirect '/'
 end
+
+get '/import' do
+  erb :import
+end
+
+post '/import' do
+  url = params
+
+  end
 
