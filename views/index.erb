@@ -1,0 +1,10 @@
+
+
+<% @book.each_with_index do |recipe, index| %>
+  <% done = recipe.done? == "true" ? "[x]" : "[ ]" %>
+      <p> <%= "#{index + 1} #{done} #{recipe.name.capitalize} (#{recipe.time}), difficulty: #{recipe.difficulty}/4" %>
+   <% end %>
+</p>
+
+<a href="http://localhost:4567/create"> new </a>
+
